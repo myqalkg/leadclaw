@@ -1,7 +1,7 @@
 <view class="container">
   <!-- 标题已全量移除，内容直接从 0 像素开始 -->
   <view class="feed">
-    <view class="item-card" wx:for="{{items}}" wx:key="id">
+    <view class="item-card" bindtap="handleGoBuy" data-item="{{item}}" wx:for="{{items}}" wx:key="id">
       <view class="score-badge">SC: {{item.score}}</view>
       <image src="{{item.thumb}}" mode="aspectFill" class="thumb"></image>
       <view class="info">
