@@ -1,0 +1,22 @@
+<view class="container">
+  <view class="user-info">
+    <block wx:if="{{!userInfo}}">
+      <button class="login-btn" bindtap="handleLogin">点击授权一键登录</button>
+    </block>
+    <block wx:else>
+      <image class="avatar-real" src="{{userInfo.avatarUrl}}"></image>
+      <text class="nickname">{{userInfo.nickName}}</text>
+    </block>
+  </view>
+  
+  <view class="section">
+    <view class="section-title">我的订阅云列表</view>
+    <view class="sub-item" wx:for="{{subscriptions}}" wx:key="id">
+      <view class="sub-info">
+        <text class="sub-kw">{{item.keyword}}</text>
+        <text class="sub-status">实时监控中</text>
+      </view>
+      <text class="sub-count">{{item.newCount}}条新神价</text>
+    </view>
+  </view>
+</view>

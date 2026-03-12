@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>Lead-Claw 官方图标交付件 (AppIcon V1.0)</title>
+    <style>
+        body { background: #f0f0f0; display: flex; flex-direction: column; align-items: center; padding: 50px; font-family: sans-serif; }
+        .icon-container { width: 300px; height: 300px; background: white; border-radius: 60px; display: flex; align-items: center; justify-content: center; box-shadow: 0 20px 40px rgba(0,0,0,0.1); margin-bottom: 30px; }
+        .claw-svg { width: 180px; height: 180px; fill: #EA580C; }
+        .spec-table { width: 600px; border-collapse: collapse; background: white; border-radius: 12px; overflow: hidden; box-shadow: 0 5px 15px rgba(0,0,0,0.05); }
+        .spec-table th, .spec-table td { padding: 15px; border-bottom: 1px solid #eee; text-align: left; font-size: 14px; }
+        .spec-table th { background: #fafafa; color: #666; }
+    </style>
+</head>
+<body>
+    <h2 style="color: #333; margin-bottom: 30px;">领爪 Lead-Claw 官方小程序 Logo V1.0</h2>
+    
+    <div class="icon-container" id="icon-box">
+        <!-- 领爪矢量图标模拟 -->
+        <svg id="claw-svg" width="1024" height="1024" viewBox="0 0 1024 1024" fill="none" xmlns="http://www.w3.org/2000/svg" style="width:220px; height:220px;">
+            <rect width="1024" height="1024" rx="220" fill="white"/>
+            <!-- 恢复：具有力量感的弧形爪痕 -->
+            <path d="M360 280 C390 450 410 600 380 780" stroke="#EA580C" stroke-width="70" stroke-linecap="round"/>
+            <path d="M512 220 C535 450 535 600 512 820" stroke="#EA580C" stroke-width="75" stroke-linecap="round"/>
+            <path d="M664 280 C634 450 614 600 644 780" stroke="#EA580C" stroke-width="70" stroke-linecap="round"/>
+            <!-- 恢复：神价热度光环 -->
+            <path d="M300 880 Q512 980 724 880" stroke="#EA580C" stroke-width="15" stroke-dasharray="30 20" opacity="0.3"/>
+        </svg>
+    </div>
+
+    <button id="download-btn" style="background:#EA580C; color:white; border:none; padding:15px 30px; border-radius:30px; font-weight:bold; cursor:pointer; font-size:16px; margin-bottom:30px; box-shadow: 0 4px 15px rgba(234,88,12,0.3);">
+        点击下载高清 PNG (1024x1024)
+    </button>
+
+    <canvas id="canvas" width="1024" height="1024" style="display:none;"></canvas>
+
+    <script>
+        document.getElementById('download-btn').addEventListener('click', function() {
+            const svg = document.getElementById('claw-svg');
+            const canvas = document.getElementById('canvas');
+            const ctx = canvas.getContext('2d');
+            
+            const svgData = new XMLSerializer().serializeToString(svg);
+            const img = new Image();
+            const svgBlob = new Blob([svgData], {type: 'image/svg+xml;charset=utf-8'});
+            const url = URL.createObjectURL(svgBlob);
+
+            img.onload = function() {
+                ctx.clearRect(0, 0, 1024, 1024);
+                ctx.drawImage(img, 0, 0);
+                const pngUrl = canvas.toDataURL("image/png");
+                
+                const downloadLink = document.createElement("a");
+                downloadLink.href = pngUrl;
+                downloadLink.download = "lead-claw-logo-1024.png";
+                document.body.appendChild(downloadLink);
+                downloadLink.click();
+                document.body.removeChild(downloadLink);
+                URL.revokeObjectURL(url);
+            };
+            img.src = url;
+            alert('正在生成 1024x1024 高清 PNG，请稍候...');
+        });
+    </script>
+
+    <table class="spec-table">
+        <tr><th>规格项</th><th>数值/标准</th></tr>
+        <tr><td>Brand Color</td><td>#EA580C (Orange-600)</td></tr>
+        <tr><td>Background</td><td>#FFFFFF (Solid White)</td></tr>
+        <tr><td>Corner Radius</td><td>微信标准 (Circled/Rounded)</td></tr>
+        <tr><td>File Sizes</td><td>144x144, 256x256, 1024x1024</td></tr>
+        <tr><td>Format</td><td>Transparent PNG / SVG Source</td></tr>
+    </table>
+</body>
+</html>

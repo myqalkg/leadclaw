@@ -1,0 +1,30 @@
+<view class="container">
+  <!-- 标题已全量移除，内容直接从 0 像素开始 -->
+  <view class="feed">
+    <view class="item-card" wx:for="{{items}}" wx:key="id">
+      <view class="score-badge">SC: {{item.score}}</view>
+      <image src="{{item.thumb}}" mode="aspectFill" class="thumb"></image>
+      <view class="info">
+        <text class="item-title">{{item.title}}</text>
+        <view class="price-row">
+          <text class="label">券后</text>
+          <text class="price">¥{{item.price}}</text>
+          <text class="old">¥{{item.old}}</text>
+        </view>
+      </view>
+    </view>
+    <view class="bottom-padding"></view>
+  </view>
+
+  <!-- 授权条依然保留，但 index 行已被抹除 -->
+  <view class="auth-bar">
+    <view class="auth-left">
+      <view class="auth-icon">🐾</view>
+      <view class="auth-info">
+        <text class="auth-title">订阅神价通知</text>
+        <text class="auth-sub">开启 24h 爆品提醒</text>
+      </view>
+    </view>
+    <button class="auth-btn" open-type="getPhoneNumber">立即开启</button>
+  </view>
+</view>
